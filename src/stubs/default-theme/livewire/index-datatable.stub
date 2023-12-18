@@ -34,5 +34,5 @@ DummyIndexTable
             @endforeach
         </tbody>
     </table>
-    {{ $posts->links() }}
+    {{ DummyCreateVariable$->links() }}
 </div>
