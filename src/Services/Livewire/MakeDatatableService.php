@@ -60,6 +60,12 @@ class MakeDatatableService
     {
         $datatableStub = $this->replaceContentDatatableStub($namingConvention, $laravelNamespace, $columnInSearch);
 
+        if (!File::isDirectory($this->pathsAndNamespacesService->getRealpathBaseDatatable()))
+        {
+            File::makeDirectory($this->pathsAndNamespacesService->getRealpathBaseDatatable(), 0755, true);
+            $this->line("<info>Created Livewire directory</info>");
+        }
+
         // if our datatable doesn't exists we create it
         $pathNewDatatable = $this->pathsAndNamespacesService->getRealpathBaseCustomDatatable($namingConvention);
         $this->createDatatableFile($pathNewDatatable, $datatableStub, $namingConvention);

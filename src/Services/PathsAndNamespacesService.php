@@ -140,7 +140,7 @@ class PathsAndNamespacesService
 
     public function getRealpathBaseCustomController($namingConvention): string
     {
-        return $this->getRealpathBaseController().$customDirController.DIRECTORY_SEPARATOR.$namingConvention['plural_name'].'Controller.php';
+        return $this->getRealpathBaseController().$this->customDirController.DIRECTORY_SEPARATOR.$namingConvention['plural_name'].'Controller.php';
     }
 
     public function getRealpathBaseCustomCommentableController($namingConvention): string
@@ -248,12 +248,12 @@ class PathsAndNamespacesService
 
     public function getDefaultNamespaceDatatable($rootNamespace): string
     {
-        return $rootNamespace.'Livewire';
+        return $rootNamespace.'Http\Livewire';
     }
 
     public function getRealpathBaseDatatable()
     {
-        return $this->getRealpathBase('app'.DIRECTORY_SEPARATOR.'Livewire');
+        return $this->getRealpathBase('app'.DIRECTORY_SEPARATOR.'Http'.DIRECTORY_SEPARATOR.'Livewire');
 
     }
 
