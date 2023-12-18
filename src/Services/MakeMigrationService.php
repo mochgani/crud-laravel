@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrdebug\Crudgen\Services;
+namespace Mochgani\CrudLaravel\Services;
 
 
 use Illuminate\Support\Str;
