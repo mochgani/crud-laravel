@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\File;
 
 class PathsAndNamespacesService
 {
+    protected $customDirController = DIRECTORY_SEPARATOR.'Backend';
+    
     public function getStubPath(): string
     {
         return __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'stubs';
@@ -138,7 +140,7 @@ class PathsAndNamespacesService
 
     public function getRealpathBaseCustomController($namingConvention): string
     {
-        return $this->getRealpathBaseController().DIRECTORY_SEPARATOR.$namingConvention['plural_name'].'Controller.php';
+        return $this->getRealpathBaseController().$customDirController.DIRECTORY_SEPARATOR.$namingConvention['plural_name'].'Controller.php';
     }
 
     public function getRealpathBaseCustomCommentableController($namingConvention): string
