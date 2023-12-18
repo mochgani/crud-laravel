@@ -1,5 +1,9 @@
 @extends('DummyExtends')
 
+@push('css')
+
+@endpush
+
 @section('DummySection')
 
 	<div class="d-flex justify-content-end mb-3"><a href="{{ route('DummyVariable.create') }}" class="btn btn-info">Create</a></div>

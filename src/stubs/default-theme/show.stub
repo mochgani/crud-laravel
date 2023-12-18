@@ -1,5 +1,9 @@
 @extends('DummyExtends')
 
+@push('css')
+
+@endpush
+
 @section('DummySection')
 
 	{{ DummyCreateVariableSing$->id }}

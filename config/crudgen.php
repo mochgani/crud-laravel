@@ -7,22 +7,22 @@ return
     [
         'index'=>
         [
-            'extends'=>'default',
+            'extends'=>'backend.layouts.app',
             'section'=>'content'
         ],
         'create'=>
         [
-            'extends'=>'default',
+            'extends'=>'backend.layouts.app',
             'section'=>'content'
         ],
         'edit'=>
         [
-            'extends'=>'default',
+            'extends'=>'backend.layouts.app',
             'section'=>'content'
         ],
         'show'=>
         [
-            'extends'=>'default',
+            'extends'=>'backend.layouts.app',
             'section'=>'content'
         ],
     ],
