@@ -33,7 +33,7 @@
         {
             "psr-4":
             {
-                "Mochgani\\CrudLaravel": "src/"
+                "Mochgani\\CrudLaravel\\": "src/"
             }
         },
     "extra":
