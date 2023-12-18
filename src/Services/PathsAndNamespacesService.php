@@ -253,7 +253,7 @@ class PathsAndNamespacesService
 
     public function getRealpathBaseDatatable()
     {
-        return $this->getRealpathBase('app'.DIRECTORY_SEPARATOR.'Http'.DIRECTORY_SEPARATOR.'Livewire');
+        return $this->getRealpathBase('app'.DIRECTORY_SEPARATOR.'Http').DIRECTORY_SEPARATOR.'Livewire';
 
     }
 
