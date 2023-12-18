@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 class PathsAndNamespacesService
 {
-    protected $customDirController = DIRECTORY_SEPARATOR.'Backend';
+    public $customDirController = DIRECTORY_SEPARATOR.'Backend';
     
     public function getStubPath(): string
     {
