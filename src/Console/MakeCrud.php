@@ -75,7 +75,7 @@ class MakeCrud extends Command
         $withLivewire     = $this->option('with-livewire');
         $namingConvention = $this->makeGlobalService->getNamingConvention($crudName);
         $columns          = $this->makeGlobalService->parseColumns($this->argument('columns'));
-        $laravelNamespace = $this->laravel->getNamespace().'\Backend';
+        $laravelNamespace = $this->laravel->getNamespace();
 
         /* *************************************************************************
 

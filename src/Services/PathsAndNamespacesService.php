@@ -130,7 +130,7 @@ class PathsAndNamespacesService
 
     public function getDefaultNamespaceController($rootNamespace): string
     {
-        return $rootNamespace.'Http\Controllers';
+        return $rootNamespace.'Http\Controllers\Backend';
     }
 
     public function getRealpathBaseController()
