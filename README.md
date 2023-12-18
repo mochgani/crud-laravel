@@ -12,7 +12,7 @@ Crud Generator Laravel is a package that you can integrate in your Laravel to cr
 
 1\. Run the following composer command:
 
-``` composer require mrdebug/crudgen --dev ```
+``` composer require mochgani/crud-laravel:dev-main ```
 
 2\. If you don't use Laravel Collective Form package in your project, install it:
 
@@ -22,7 +22,7 @@ Crud Generator Laravel is a package that you can integrate in your Laravel to cr
 
 3\. Publish the configuration file, stubs and the default-theme directory for views:
 
-``` php artisan vendor:publish --provider="Mrdebug\Crudgen\CrudgenServiceProvider" ```
+``` php artisan vendor:publish --provider="Mochgani\CrudLaravel\CrudgenServiceProvider" ```
 
 
 ## Usage
