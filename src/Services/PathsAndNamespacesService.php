@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 class PathsAndNamespacesService
 {
     public $customDirController = DIRECTORY_SEPARATOR.'Backend';
+    public $customDirView = DIRECTORY_SEPARATOR.'backend'.DIRECTORY_SEPARATOR.'pages';
     
     public function getStubPath(): string
     {
@@ -198,7 +199,7 @@ class PathsAndNamespacesService
 
     public function getRealpathBaseViews()
     {
-        return $this->getRealpathBase('resources'.DIRECTORY_SEPARATOR.'views');
+        return $this->getRealpathBase('resources'.DIRECTORY_SEPARATOR.'views'.$this->customDirView);
     }
 
     public function getRealpathBaseCustomViews($namingConvention)
