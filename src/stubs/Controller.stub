@@ -17,7 +17,7 @@ class DummyClass extends Controller
     public function index()
     {
         DummyCreateVariable$= DummyModel::all();
-        return view('DummyVariable.index', ['DummyVariable'=>DummyCreateVariable$]);
+        return view('DummyBaseDirDummyVariable.index', ['DummyVariable'=>DummyCreateVariable$]);
     }
 
     /**
@@ -27,7 +27,7 @@ class DummyClass extends Controller
      */
     public function create()
     {
-        return view('DummyVariable.create');
+        return view('DummyBaseDirDummyVariable.create');
     }
 
     /**
