@@ -42,7 +42,7 @@ class DummyClass extends Controller
 DummyUpdate
         DummyCreateVariableSing$->save();
 
-        return to_route('DummyBaseDirDummyVariable.index');
+        return to_route('DummyVariable.index');
     }
 
     /**
@@ -82,7 +82,7 @@ DummyUpdate
 DummyUpdate
         DummyCreateVariableSing$->save();
 
-        return to_route('DummyBaseDirDummyVariable.index');
+        return to_route('DummyVariable.index');
     }
 
     /**
@@ -96,6 +96,6 @@ DummyUpdate
         DummyCreateVariableSing$ = DummyModel::findOrFail($id);
         DummyCreateVariableSing$->delete();
 
-        return to_route('DummyBaseDirDummyVariable.index');
+        return to_route('DummyVariable.index');
     }
 }
