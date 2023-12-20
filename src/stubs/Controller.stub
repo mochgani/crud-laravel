@@ -42,7 +42,7 @@ class DummyClass extends Controller
 DummyUpdate
         DummyCreateVariableSing$->save();
 
-        return to_route('DummyVariable.index');
+        return to_route('DummyBaseDirDummyVariable.index');
     }
 
     /**
@@ -54,7 +54,7 @@ DummyUpdate
     public function show($id)
     {
         DummyCreateVariableSing$ = DummyModel::findOrFail($id);
-        return view('DummyVariable.show',['DummyVariableSing'=>DummyCreateVariableSing$]);
+        return view('DummyBaseDirDummyVariable.show',['DummyVariableSing'=>DummyCreateVariableSing$]);
     }
 
     /**
@@ -66,7 +66,7 @@ DummyUpdate
     public function edit($id)
     {
         DummyCreateVariableSing$ = DummyModel::findOrFail($id);
-        return view('DummyVariable.edit',['DummyVariableSing'=>DummyCreateVariableSing$]);
+        return view('DummyBaseDirDummyVariable.edit',['DummyVariableSing'=>DummyCreateVariableSing$]);
     }
 
     /**
@@ -82,7 +82,7 @@ DummyUpdate
 DummyUpdate
         DummyCreateVariableSing$->save();
 
-        return to_route('DummyVariable.index');
+        return to_route('DummyBaseDirDummyVariable.index');
     }
 
     /**
@@ -96,6 +96,6 @@ DummyUpdate
         DummyCreateVariableSing$ = DummyModel::findOrFail($id);
         DummyCreateVariableSing$->delete();
 
-        return to_route('DummyVariable.index');
+        return to_route('DummyBaseDirDummyVariable.index');
     }
 }

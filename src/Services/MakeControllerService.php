@@ -14,6 +14,9 @@ class MakeControllerService
 
     public PathsAndNamespacesService $pathsAndNamespacesService;
     public MakeGlobalService $makeGlobalService;
+
+    public $customDirBlade = 'backend.pages.';
+
     public function __construct(
         PathsAndNamespacesService $pathsAndNamespacesService,
         ConsoleOutput $consoleOutput,
@@ -35,6 +38,7 @@ class MakeControllerService
         $controllerStub = str_replace('DummyModel', $namingConvention['singular_name'], $controllerStub);
         $controllerStub = str_replace('DummyVariableSing', $namingConvention['singular_low_name'], $controllerStub);
         $controllerStub = str_replace('DummyVariable', $namingConvention['plural_low_name'], $controllerStub);
+        $controllerStub = str_replace('DummyBaseDir', $this->customDirBlade, $controllerStub);
         $controllerStub = str_replace('DummyNamespace', $this->pathsAndNamespacesService->getDefaultNamespaceController($laravelNamespace), $controllerStub);
         $controllerStub = str_replace('DummyRootNamespace', $laravelNamespace, $controllerStub);
         return $controllerStub;
