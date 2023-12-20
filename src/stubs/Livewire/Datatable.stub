@@ -18,7 +18,7 @@ class DummyClass extends Component
             $query->where('{{column-in-search}}', 'like', '%' . $this->search . '%');
         })->paginate(10);
 
-        return view('{{directory-views}}.{{name-component}}-datatable', ['DummyVariable'=>DummyCreateVariable$]);
+        return view('DummyBaseDir{{directory-views}}.{{name-component}}-datatable', ['DummyVariable'=>DummyCreateVariable$]);
     }
 
     public function updatingSearch()

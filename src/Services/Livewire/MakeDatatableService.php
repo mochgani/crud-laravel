@@ -16,6 +16,9 @@ class MakeDatatableService
 
     public PathsAndNamespacesService $pathsAndNamespacesService;
     public MakeGlobalService $makeGlobalService;
+
+    public $customDirBlade = 'backend.pages.';
+
     public function __construct(
         PathsAndNamespacesService $pathsAndNamespacesService,
         ConsoleOutput $consoleOutput,
@@ -41,6 +44,7 @@ class MakeDatatableService
         $datatableStub = str_replace('{{name-component}}', $namingConvention['singular_low_name'], $datatableStub);
         $datatableStub = str_replace('{{directory-views}}', $namingConvention['plural_low_name'], $datatableStub);
         $datatableStub = str_replace('{{column-in-search}}', $columnInSearch, $datatableStub);
+        $datatableStub = str_replace('DummyBaseDir', $this->customDirBlade, $datatableStub);
 
         return $datatableStub;
     }
