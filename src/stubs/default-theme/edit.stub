@@ -21,6 +21,12 @@
             <li class="nav-item">
                 <a href="{{ url('admin/DummyVariable') }}">DummyVariable</a>
             </li>
+			<li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="">DummyVariable Edit</a>
+            </li>
         </ul>
     </div>
 
@@ -29,7 +35,7 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="d-flex align-items-center">
-						<h4 class="card-title">DummyVariable Insert</h4>
+						<h4 class="card-title">DummyVariable Edit</h4>
 						<a href="{{ url('admin/DummyVariable') }}" class="btn btn-primary btn-round ml-auto">
 							<i class="fa fa-reply"></i>
 							DummyVariable

@@ -16,6 +16,9 @@ class DummyClass extends Controller
      */
     public function index()
     {
+        if(isAccessPage('DummyVariable', 'show')==false)
+            return redirect('forbidden');
+
         return view('DummyBaseDirDummyVariable.index');
     }
 
@@ -26,6 +29,9 @@ class DummyClass extends Controller
      */
     public function create()
     {
+        if(isAccessPage('DummyVariable', 'create')==false)
+            return redirect('forbidden');
+
         return view('DummyBaseDirDummyVariable.create');
     }
 
@@ -52,6 +58,9 @@ DummyUpdate
      */
     public function show($id)
     {
+        if(isAccessPage('DummyVariable', 'show')==false)
+            return redirect('forbidden');
+
         DummyCreateVariableSing$ = DummyModel::findOrFail($id);
         return view('DummyBaseDirDummyVariable.show',['DummyVariableSing'=>DummyCreateVariableSing$]);
     }
@@ -64,6 +73,9 @@ DummyUpdate
      */
     public function edit($id)
     {
+        if(isAccessPage('DummyVariable', 'update')==false)
+            return redirect('forbidden');
+
         DummyCreateVariableSing$ = DummyModel::findOrFail($id);
         return view('DummyBaseDirDummyVariable.edit',['DummyVariableSing'=>DummyCreateVariableSing$]);
     }
