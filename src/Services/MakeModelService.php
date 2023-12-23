@@ -86,7 +86,11 @@ class MakeModelService
 
     public function makeCompleteModelFile($infos, $singularName, $namingConvention, $laravelNamespace)
     {
-        $allRelations = $this->getAllRelationshipMethodsModel($infos, $singularName, $laravelNamespace);
+        if(empty($infos))
+            $allRelations = '';
+        else
+            $allRelations = $this->getAllRelationshipMethodsModel($infos, $singularName, $laravelNamespace);
+
         $modelStub = $this->replaceContentModelStub($laravelNamespace, $singularName, $namingConvention, $allRelations);
         $this->createModelFile($namingConvention, $modelStub, $singularName);
     }

@@ -156,7 +156,8 @@ class MakeCrud extends Command
 
             //if cancel choice is selected, we make a basic model
             if($type=="Cancel")
-                $this->call('make:model', ['name' => $this->pathsAndNamespacesService->getDefaultNamespaceCustomModel($this->laravel->getNamespace(), $singularName)]);
+                $this->makeModelService->makeCompleteModelFile($infos, $singularName, $namingConvention, $this->laravel->getNamespace());
+            //$this->call('make:model', ['name' => $this->pathsAndNamespacesService->getDefaultNamespaceCustomModel($this->laravel->getNamespace(), $singularName)]);
             //we want a name for this model
             else
                 $this->setNameModelRelationship($type, $namingConvention, $infos);
@@ -165,11 +166,12 @@ class MakeCrud extends Command
         else
         {
             //$infos is empty we didn't really create a relationship
-            if(empty($infos))
-                $this->call('make:model', ['name' => $this->pathsAndNamespacesService->getDefaultNamespaceCustomModel($this->laravel->getNamespace(), $singularName)]);
+            //if(empty($infos))
+                
+            //$this->call('make:model', ['name' => $this->pathsAndNamespacesService->getDefaultNamespaceCustomModel($this->laravel->getNamespace(), $singularName)]);
 
             //we get all relationships asked and we create our model
-            else
+            //else
                 $this->makeModelService->makeCompleteModelFile($infos, $singularName, $namingConvention, $this->laravel->getNamespace());
         }
     }
