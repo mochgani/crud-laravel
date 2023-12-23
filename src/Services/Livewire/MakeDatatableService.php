@@ -48,7 +48,6 @@ class MakeDatatableService
             $type      = explode(':', trim($column));
             $sql_type  = (count($type)==2) ? $type[1] : 'string';
             $column    = $type[0];
-            $typeHtml = $this->getHtmlType($sql_type);
 
             if(count($type)==4 && $type[1]=='relasi'){
                 $cols .= 'with(\''.$type[2].'\')->';
