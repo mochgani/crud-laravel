@@ -40,7 +40,7 @@ class MakeModelService
 
             $allRelations .= str_repeat("\t", 1).'public function '.$nameFunction.'()'."\n";
             $allRelations .= str_repeat("\t", 1).'{'."\n";
-            $allRelations .= str_repeat("\t", 2).'return $this->'.$info['type'].'(\''.$laravelNamespace.'Models\\'.ucfirst(Str::singular($info['name'])).'\');'."\n";
+            $allRelations .= str_repeat("\t", 2).'return $this->'.$info['type'].'('.ucfirst(Str::singular($info['name'])).'::class, \'id\', \'id_'.Str::singular($info['name']).'\');'."\n";
             $allRelations .= str_repeat("\t", 1).'}'."\n\n";
 
 

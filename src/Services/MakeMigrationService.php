@@ -46,8 +46,13 @@ class MakeMigrationService
             $sqlType = (count($type)==2) ? $type[1] : 'string';
             $column   = $type[0];
 
-            // our placeholders
-            $fieldsMigration .= str_repeat("\t", 3).'$table'."->$sqlType('".trim($column)."');\n";
+            if(count($type)==3 && $type[1]=='relasi'){
+                // our placeholders
+                $fieldsMigration .= str_repeat("\t", 3).'$table'."->uuid('".trim($column)."');\n";
+            } else {
+                // our placeholders
+                $fieldsMigration .= str_repeat("\t", 3).'$table'."->$sqlType('".trim($column)."');\n";
+            }
         }
 
         $fieldsMigration = $this->makeGlobalService->cleanLastLineBreak($fieldsMigration);

@@ -124,11 +124,25 @@ class MakeViewsService
             $column    = $type[0];
             $typeHtml = $this->getHtmlType($sql_type);
 
-            // our placeholders
-            $formCreate .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
-            $formCreate .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";
-            $formCreate .=str_repeat("\t", 3).'{{ Form::'.$typeHtml.'(\''.trim($column).'\', null, array(\'class\' => \'form-control\')) }}'."\n";
-            $formCreate .=str_repeat("\t", 2).'</div>'."\n";
+            if(count($type)==3 && $type[1]=='relasi'){
+                // our placeholders
+                $formCreate .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
+                $formCreate .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($type[2])).'\', [\'class\'=>\'form-label\']) }}'."\n";
+                $formCreate .=str_repeat("\t", 3).'<select class=\'form-control\' name=\''.trim($column).'\' required>'."\n";
+                $formCreate .=str_repeat("\t", 4).'<option value=\'\' selected disabled>- Choose '.ucfirst(trim($type[1])).' -</option>'."\n";
+                $formCreate .=str_repeat("\t", 4).'@php $'.trim($type[2]).'s = App\\Models\\'.ucfirst(trim($type[2])).'::all()->sortBy(\'created_at\'); @endphp'."\n";
+                $formCreate .=str_repeat("\t", 4).'@foreach($'.trim($type[2]).'s as $item)'."\n";
+                $formCreate .=str_repeat("\t", 5).'<option value=\'{{ $item->id }}\'>{{ $item->id }}</option>'."\n";
+                $formCreate .=str_repeat("\t", 4).'@endforeach'."\n";
+                $formCreate .=str_repeat("\t", 3).'</select>'."\n";
+                $formCreate .=str_repeat("\t", 2).'</div>'."\n";
+            } else {
+                // our placeholders
+                $formCreate .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
+                $formCreate .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";
+                $formCreate .=str_repeat("\t", 3).'{{ Form::'.$typeHtml.'(\''.trim($column).'\', null, array(\'class\' => \'form-control\')) }}'."\n";
+                $formCreate .=str_repeat("\t", 2).'</div>'."\n";
+            }
         }
 
         $createStub = File::get($this->pathsAndNamespacesService->getCrudgenViewsStubCustom($templateViewsDirectory).DIRECTORY_SEPARATOR.'create.stub');
@@ -157,12 +171,26 @@ class MakeViewsService
             $sql_type  = (count($type)==2) ? $type[1] : 'string';
             $column    = $type[0];
             $typeHtml = $this->getHtmlType($sql_type);
-
-            // our placeholders
-            $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
-            $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";
-            $formEdit .=str_repeat("\t", 3).'{{ Form::'.$typeHtml.'(\''.trim($column).'\', null, array(\'class\' => \'form-control\')) }}'."\n";
-            $formEdit .=str_repeat("\t", 2).'</div>'."\n";
+            
+            if(count($type)==3 && $type[1]=='relasi'){
+                // our placeholders
+                $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($type[2])).'\', [\'class\'=>\'form-label\']) }}'."\n";
+                $formEdit .=str_repeat("\t", 3).'<select class=\'form-control\' name=\''.trim($column).'\' required>'."\n";
+                $formEdit .=str_repeat("\t", 4).'<option value=\'\' selected disabled>- Choose '.ucfirst(trim($type[1])).' -</option>'."\n";
+                $formEdit .=str_repeat("\t", 4).'@php $'.trim($type[2]).'s = App\\Models\\'.ucfirst(trim($type[2])).'::all()->sortBy(\'created_at\'); @endphp'."\n";
+                $formEdit .=str_repeat("\t", 4).'@foreach($'.trim($type[2]).'s as $item)'."\n";
+                $formEdit .=str_repeat("\t", 5).'<option value=\'{{ $item->id }}\' {{ ($'.$namingConvention['singular_low_name'].'->'.trim($column).' == $item->id)?\'selected\':\'\' }} >{{ $item->id }}</option>'."\n";
+                $formEdit .=str_repeat("\t", 4).'@endforeach'."\n";
+                $formEdit .=str_repeat("\t", 3).'</select>'."\n";
+                $formEdit .=str_repeat("\t", 2).'</div>'."\n";
+            } else {
+                // our placeholders
+                $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::'.$typeHtml.'(\''.trim($column).'\', null, array(\'class\' => \'form-control\')) }}'."\n";
+                $formEdit .=str_repeat("\t", 2).'</div>'."\n";
+            }
         }
 
         $editStub = File::get($this->pathsAndNamespacesService->getCrudgenViewsStubCustom($templateViewsDirectory).DIRECTORY_SEPARATOR.'edit.stub');
