@@ -4,10 +4,14 @@ namespace DummyNamespace\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasUUID;
 
 class DummyClass extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
+
+    public $incrementing = false;
+    protected $table = 'DummyVariable';
 
 DummyRelations
 }

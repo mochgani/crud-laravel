@@ -62,11 +62,12 @@ class MakeModelService
         return $this->makeGlobalService->cleanLastLineBreak($allRelations);
     }
 
-    public function replaceContentModelStub($laravelNamespace, $singularName, $allRelations)
+    public function replaceContentModelStub($laravelNamespace, $singularName, $namingConvention, $allRelations)
     {
         $modelStub = File::get($this->pathsAndNamespacesService->getModelStubPath());
         $modelStub = str_replace('DummyNamespace', trim($laravelNamespace, '\\'), $modelStub);
         $modelStub = str_replace('DummyClass', $singularName, $modelStub);
+        $modelStub = str_replace('DummyVariable', $namingConvention['plural_low_name'], $modelStub);
         $modelStub = str_replace('DummyRelations', $allRelations, $modelStub);
 
         return $modelStub;
@@ -86,7 +87,7 @@ class MakeModelService
     public function makeCompleteModelFile($infos, $singularName, $namingConvention, $laravelNamespace)
     {
         $allRelations = $this->getAllRelationshipMethodsModel($infos, $singularName, $laravelNamespace);
-        $modelStub = $this->replaceContentModelStub($laravelNamespace, $singularName, $allRelations);
+        $modelStub = $this->replaceContentModelStub($laravelNamespace, $singularName, $namingConvention, $allRelations);
         $this->createModelFile($namingConvention, $modelStub, $singularName);
     }
 

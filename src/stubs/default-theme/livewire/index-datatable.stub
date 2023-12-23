@@ -37,15 +37,15 @@
                         <table id="menus" class="display nowrap table table-striped table-hover" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>id</th>
+                                    <th>No</th>
                                     DummyHeaderTable
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach(DummyCreateVariable$ as DummyCreateVariableSing$)
+                                @foreach(DummyCreateVariable$ as $k => DummyCreateVariableSing$)
                                     <tr>
-                                        <td>{{ DummyCreateVariableSing$->id }}</td>
+                                        <td>{{ $k+1 }}</td>
                                         DummyIndexTable
                                         <td>
                                             <div class="d-flex gap-2">
