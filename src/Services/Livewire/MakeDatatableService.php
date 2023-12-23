@@ -32,12 +32,32 @@ class MakeDatatableService
         $this->makeGlobalService = $makeGlobalService;
     }
 
-    public function replaceContentDatatableStub($namingConvention, $laravelNamespace, $columnInSearch)
+    public function replaceContentDatatableStub($namingConvention, $laravelNamespace, $columnInSearch, $columns)
     {
+        
+
+
         $datatableStub = File::get($this->pathsAndNamespacesService->getDatatableStubPath());
         $datatableStub = str_replace('DummyClass', $namingConvention['singular_name'].'Datatable', $datatableStub);
         $datatableStub = str_replace('DummyModel', $namingConvention['singular_name'], $datatableStub);
         $datatableStub = str_replace('DummyVariable', $namingConvention['plural_low_name'], $datatableStub);
+
+        $cols='';
+        foreach ($columns as $column)
+        {
+            $type      = explode(':', trim($column));
+            $sql_type  = (count($type)==2) ? $type[1] : 'string';
+            $column    = $type[0];
+            $typeHtml = $this->getHtmlType($sql_type);
+
+            if(count($type)==4 && $type[1]=='relasi'){
+                $cols .= 'with(\''.$type[2].'\')->';
+            } else {
+                $cols .= '';
+            }
+        }
+
+        $datatableStub = str_replace('DummyRelasi', $cols, $datatableStub);
         $datatableStub = str_replace('DummyNamespace', $this->pathsAndNamespacesService->getDefaultNamespaceDatatable($laravelNamespace), $datatableStub);
         $datatableStub = str_replace('DummyRootNamespace', $laravelNamespace, $datatableStub);
         $datatableStub = str_replace('DummyCreateVariable$', '$'.$namingConvention['plural_low_name'], $datatableStub);
@@ -60,9 +80,9 @@ class MakeDatatableService
             $this->error('Datatable '.$namingConvention['singular_name'].' already exists');
     }
 
-    public function makeCompleteDatatableFile($namingConvention, $laravelNamespace, $columnInSearch)
+    public function makeCompleteDatatableFile($namingConvention, $laravelNamespace, $columnInSearch, $columns)
     {
-        $datatableStub = $this->replaceContentDatatableStub($namingConvention, $laravelNamespace, $columnInSearch);
+        $datatableStub = $this->replaceContentDatatableStub($namingConvention, $laravelNamespace, $columnInSearch, $columns);
 
         if (!File::isDirectory($this->pathsAndNamespacesService->getRealpathBaseDatatable()))
         {

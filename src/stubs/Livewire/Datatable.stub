@@ -14,7 +14,7 @@ class DummyClass extends Component
 
     public function render()
     {
-        DummyCreateVariable$ = DummyModel::when($this->search, function ($query) {
+        DummyCreateVariable$ = DummyModel::DummyRelasiwhen($this->search, function ($query) {
             $query->where('{{column-in-search}}', 'like', '%' . $this->search . '%');
         })->paginate(10);
 

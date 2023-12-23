@@ -93,7 +93,7 @@ class MakeCrud extends Command
         if($withLivewire)
         {
             $columnNameInLivewireSearch = $this->setNameColumnInLivewireSearch($columns);
-            $this->makeDatatableService->makeCompleteDatatableFile($namingConvention, $laravelNamespace, $columnNameInLivewireSearch);
+            $this->makeDatatableService->makeCompleteDatatableFile($namingConvention, $laravelNamespace, $columnNameInLivewireSearch, $columns);
         }
 
         /* *************************************************************************

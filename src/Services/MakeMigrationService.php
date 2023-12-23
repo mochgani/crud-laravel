@@ -46,7 +46,7 @@ class MakeMigrationService
             $sqlType = (count($type)==2) ? $type[1] : 'string';
             $column   = $type[0];
 
-            if(count($type)==3 && $type[1]=='relasi'){
+            if(count($type)==4 && $type[1]=='relasi'){
                 // our placeholders
                 $fieldsMigration .= str_repeat("\t", 3).'$table'."->uuid('".trim($column)."');\n";
             } else {

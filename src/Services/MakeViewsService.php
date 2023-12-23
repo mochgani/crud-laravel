@@ -78,12 +78,21 @@ class MakeViewsService
             $column    = $type[0];
 
             // our placeholders
-            $thIndex    .=str_repeat("\t", 4)."<th>".trim($column)."</th>\n";
+            if(count($type)==4 && $type[1]=='relasi'){
+                $thIndex    .=str_repeat("\t", 4)."<th>".trim(ucfirst($type[3]))."</th>\n";
+            } else {
+                $thIndex    .=str_repeat("\t", 4)."<th>".trim($column)."</th>\n";
+            }
 
             if($column == $columnInSearch)
                 $indexView  .=str_repeat("\t", 5).'<td>{!! $this->search ? $this->highlightTitle(DummyCreateVariableSing$->'.$columnInSearch.') : DummyCreateVariableSing$->'.$columnInSearch.' !!}</td>'."\n";
-            else
-                $indexView  .=str_repeat("\t", 5)."<td>{{ DummyCreateVariableSing$->".trim($column)." }}</td>\n";
+            else{
+                if(count($type)==4 && $type[1]=='relasi'){
+                    $indexView  .=str_repeat("\t", 5)."<td>{{ DummyCreateVariableSing$->".trim($type[2])."->".trim($type[3])." }}</td>\n";
+                } else {
+                    $indexView  .=str_repeat("\t", 5)."<td>{{ DummyCreateVariableSing$->".trim($column)." }}</td>\n";
+                }
+            }
         }
 
         $indexStub =  $withLivewire
@@ -124,15 +133,15 @@ class MakeViewsService
             $column    = $type[0];
             $typeHtml = $this->getHtmlType($sql_type);
 
-            if(count($type)==3 && $type[1]=='relasi'){
+            if(count($type)==4 && $type[1]=='relasi'){
                 // our placeholders
                 $formCreate .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
                 $formCreate .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($type[2])).'\', [\'class\'=>\'form-label\']) }}'."\n";
                 $formCreate .=str_repeat("\t", 3).'<select class=\'form-control\' name=\''.trim($column).'\' required>'."\n";
-                $formCreate .=str_repeat("\t", 4).'<option value=\'\' selected disabled>- Choose '.ucfirst(trim($type[2])).' -</option>'."\n";
+                $formCreate .=str_repeat("\t", 4).'<option value=\'\' selected disabled>- Choose '.ucfirst(trim($type[3])).' -</option>'."\n";
                 $formCreate .=str_repeat("\t", 4).'@php $'.trim($type[2]).'s = App\\Models\\'.ucfirst(trim($type[2])).'::all()->sortBy(\'created_at\'); @endphp'."\n";
                 $formCreate .=str_repeat("\t", 4).'@foreach($'.trim($type[2]).'s as $item)'."\n";
-                $formCreate .=str_repeat("\t", 5).'<option value=\'{{ $item->id }}\'>{{ $item->id }}</option>'."\n";
+                $formCreate .=str_repeat("\t", 5).'<option value=\'{{ $item->id }}\'>{{ $item->'.trim($type[3]).' }}</option>'."\n";
                 $formCreate .=str_repeat("\t", 4).'@endforeach'."\n";
                 $formCreate .=str_repeat("\t", 3).'</select>'."\n";
                 $formCreate .=str_repeat("\t", 2).'</div>'."\n";
@@ -172,15 +181,15 @@ class MakeViewsService
             $column    = $type[0];
             $typeHtml = $this->getHtmlType($sql_type);
             
-            if(count($type)==3 && $type[1]=='relasi'){
+            if(count($type)==4 && $type[1]=='relasi'){
                 // our placeholders
                 $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
                 $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($type[2])).'\', [\'class\'=>\'form-label\']) }}'."\n";
                 $formEdit .=str_repeat("\t", 3).'<select class=\'form-control\' name=\''.trim($column).'\' required>'."\n";
-                $formEdit .=str_repeat("\t", 4).'<option value=\'\' selected disabled>- Choose '.ucfirst(trim($type[2])).' -</option>'."\n";
+                $formEdit .=str_repeat("\t", 4).'<option value=\'\' selected disabled>- Choose '.ucfirst(trim($type[3])).' -</option>'."\n";
                 $formEdit .=str_repeat("\t", 4).'@php $'.trim($type[2]).'s = App\\Models\\'.ucfirst(trim($type[2])).'::all()->sortBy(\'created_at\'); @endphp'."\n";
                 $formEdit .=str_repeat("\t", 4).'@foreach($'.trim($type[2]).'s as $item)'."\n";
-                $formEdit .=str_repeat("\t", 5).'<option value=\'{{ $item->id }}\' {{ ($'.$namingConvention['singular_low_name'].'->'.trim($column).' == $item->id)?\'selected\':\'\' }} >{{ $item->id }}</option>'."\n";
+                $formEdit .=str_repeat("\t", 5).'<option value=\'{{ $item->id }}\' {{ ($'.$namingConvention['singular_low_name'].'->'.trim($column).' == $item->id)?\'selected\':\'\' }} >{{ $item->'.trim($type[3]).' }}</option>'."\n";
                 $formEdit .=str_repeat("\t", 4).'@endforeach'."\n";
                 $formEdit .=str_repeat("\t", 3).'</select>'."\n";
                 $formEdit .=str_repeat("\t", 2).'</div>'."\n";
