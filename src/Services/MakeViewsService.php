@@ -145,6 +145,17 @@ class MakeViewsService
                 $formCreate .=str_repeat("\t", 4).'@endforeach'."\n";
                 $formCreate .=str_repeat("\t", 3).'</select>'."\n";
                 $formCreate .=str_repeat("\t", 2).'</div>'."\n";
+            } else if(count($type)==3 && $type[1]=='enum'){
+                $enum = explode('_', trim($type[2]));
+                $enum_val = "";
+                foreach($enum as $val){
+                    $enum_val .= '\'' . $val . '\' => \'' . $val .'\', ';
+                }
+                // our placeholders
+                $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::select(\''.trim($column).'\',array(\''.substr($enum_val,0,-2).'\'), null, array(\'class\' => \'form-control\')) }}'."\n";
+                $formEdit .=str_repeat("\t", 2).'</div>'."\n";
             } else {
                 // our placeholders
                 $formCreate .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
@@ -197,12 +208,12 @@ class MakeViewsService
                 $enum = explode('_', trim($type[2]));
                 $enum_val = "";
                 foreach($enum as $val){
-                    $enum_val .= "\'" . $val . "\' => \'" . $val ."\', ";
+                    $enum_val .= '\'' . $val . '\' => \'' . $val .'\', ';
                 }
                 // our placeholders
                 $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
                 $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";
-                $formEdit .=str_repeat("\t", 3).'{{ Form::'.$typeHtml.'(\''.trim($column).'\',array(\''.substr($enum_val,0,-2).'\'), null, array(\'class\' => \'form-control\')) }}'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::select(\''.trim($column).'\',array(\''.substr($enum_val,0,-2).'\'), null, array(\'class\' => \'form-control\')) }}'."\n";
                 $formEdit .=str_repeat("\t", 2).'</div>'."\n";
             } else {
                 // our placeholders
