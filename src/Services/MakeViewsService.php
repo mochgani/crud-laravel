@@ -199,8 +199,6 @@ class MakeViewsService
                 foreach($enum as $val){
                     $enum_val .= "\'" . $val . "\' => \'" . $val ."\', ";
                 }
-
-                echo substr($enum_val,0,-2);
                 // our placeholders
                 $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
                 $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";

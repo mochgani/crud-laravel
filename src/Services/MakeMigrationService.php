@@ -45,7 +45,7 @@ class MakeMigrationService
             $type     = explode(':', trim($column));
             $sqlType = (count($type)==2) ? $type[1] : 'string';
             $column   = $type[0];
-            $table->enum('status_pengajuan', ['Direview', 'DiTolak', 'Diterima'])->default('Direview');
+            
             if(count($type)==4 && $type[1]=='relasi'){
                 // our placeholders
                 $fieldsMigration .= str_repeat("\t", 3).'$table'."->uuid('".trim($column)."');\n";
