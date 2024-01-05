@@ -45,10 +45,15 @@ class MakeMigrationService
             $type     = explode(':', trim($column));
             $sqlType = (count($type)==2) ? $type[1] : 'string';
             $column   = $type[0];
-
+            $table->enum('status_pengajuan', ['Direview', 'DiTolak', 'Diterima'])->default('Direview');
             if(count($type)==4 && $type[1]=='relasi'){
                 // our placeholders
                 $fieldsMigration .= str_repeat("\t", 3).'$table'."->uuid('".trim($column)."');\n";
+            } else if(count($type)==3 && $type[1]=='enum'){
+                // our placeholders
+                $enum = explode('_', trim($type[2]));
+                $enum_value = implode("', '",$enum);
+                $fieldsMigration .= str_repeat("\t", 3).'$table'."->enum('".trim($column)."', ['".$enum_value."'])->default('".$enum[0]."');\n";
             } else {
                 // our placeholders
                 $fieldsMigration .= str_repeat("\t", 3).'$table'."->$sqlType('".trim($column)."');\n";

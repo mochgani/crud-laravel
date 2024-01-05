@@ -193,6 +193,19 @@ class MakeViewsService
                 $formEdit .=str_repeat("\t", 4).'@endforeach'."\n";
                 $formEdit .=str_repeat("\t", 3).'</select>'."\n";
                 $formEdit .=str_repeat("\t", 2).'</div>'."\n";
+            } else if(count($type)==3 && $type[1]=='enum'){
+                $enum = explode('_', trim($type[2]));
+                $enum_val = "";
+                foreach($enum as $val){
+                    $enum_val .= "\'" . $val . "\' => \'" . $val ."\', ";
+                }
+
+                echo substr($enum_val,0,-2);
+                // our placeholders
+                $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::label(\''.trim($column).'\', \''.ucfirst(trim($column)).'\', [\'class\'=>\'form-label\']) }}'."\n";
+                $formEdit .=str_repeat("\t", 3).'{{ Form::'.$typeHtml.'(\''.trim($column).'\',array(\''.substr($enum_val,0,-2).'\'), null, array(\'class\' => \'form-control\')) }}'."\n";
+                $formEdit .=str_repeat("\t", 2).'</div>'."\n";
             } else {
                 // our placeholders
                 $formEdit .=str_repeat("\t", 2).'<div class="mb-3">'."\n";
@@ -234,7 +247,8 @@ class MakeViewsService
             'text'    => 'textarea',
             'integer' => 'number',
             'uuid'  => 'text',
-            'date'  => 'date'
+            'date'  => 'date',
+            'enum'  => 'select'
         ];
         return (isset($conversion[$sql_type]) ? $conversion[$sql_type] : 'string');
     }
